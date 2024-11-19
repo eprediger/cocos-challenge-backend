@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiOkResponse, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiQuery } from '@nestjs/swagger';
 import { Instrument } from './instrument.entity';
 import { InstrumentsService } from './instruments.service';
 
@@ -8,8 +8,16 @@ export class InstrumentsController {
   public constructor(private readonly instrumentsService: InstrumentsService) {}
 
   @Get()
-  @ApiQuery({ name: 'ticker', required: false, example: 'MOLI' })
-  @ApiQuery({ name: 'name', required: false })
+  @ApiQuery({
+    name: 'ticker',
+    required: false,
+    description: 'A instrument ticker',
+  })
+  @ApiQuery({
+    name: 'name',
+    required: false,
+    description: 'A partial instrument name to be match',
+  })
   @ApiOkResponse({
     description: 'A list of instruments',
     type: [Instrument],

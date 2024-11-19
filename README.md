@@ -1,12 +1,12 @@
 # cocos-challenge-backend
 
-## Project setup
+## Pre-requisitos
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+## Compilación y ejecución
 
 ```bash
 # development
@@ -19,7 +19,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Alternative through Docker
+## Alternativa con Docker
 
 ```bash
 $ docker build -t cocos/backend:0.1 .
@@ -29,6 +29,17 @@ $ docker run -it --rm -p 3000:3000 -v $(pwd):/api cocos/backend:0.1 /bin/bash
 $ cd api
 ```
 
-## Documentation
+## Documentación
 
-`GET /openapi`
+- Swagger: `GET /openapi`
+
+## Supuestos y decisiones de diseño
+
+***Default actions* para no frenar el desarrollo:**
+
+- Enviada consulta sobre calculo de rendimiento. Al momento se simplifico el calculo al momento actual, esto es, se compara valor de la tenencia actual respecto al monto total invertido en las órdenes de compra.
+
+**Decisiones de diseño para agilizar el desarrollo:**
+
+- No se tuvo en cuenta la validación del id usuario para la consulta de portofolio u orden.
+- Se utilizaron tipos primitivos en lugar de `value objects` en entidades simples (por ejemplo: moneda, porcentaje).
