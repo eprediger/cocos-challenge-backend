@@ -14,8 +14,8 @@ export class PortfolioController {
     description: 'The user id portfolio',
   })
   @ApiOkResponse({
-    description: 'A list of instruments',
-    type: [Portfolio],
+    description: 'A user portfolio',
+    type: Portfolio,
   })
   public findUserPortfolio(@Param('userId') userId: number) {
     return this.portfolioService.findUserPortfolio(userId);
