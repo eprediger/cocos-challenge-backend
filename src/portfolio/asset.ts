@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OrderSide } from 'src/order/order.entity';
-import { Instrument } from '../instruments/instrument.entity';
+import { Instrument } from 'src/instruments/instrument.entity';
 
 export class Asset {
   @ApiProperty()
@@ -26,7 +26,7 @@ export class Asset {
         .filter((o) => o.side == OrderSide.BUY)
         .reduce((accum, currentOrder) => {
           return accum + currentOrder.orderPrice();
-        }, 0)
+        }, 0),
     );
 
     this.yield = ((this.value / buy - 1) * 100).toFixed(2);

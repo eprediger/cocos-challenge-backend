@@ -19,4 +19,10 @@ export class InstrumentsService {
       },
     });
   }
+
+  public async findById(id: number): Promise<Instrument> {
+    return this.instrumentRepo.findOneBy({
+      id,
+    });
+  }
 }

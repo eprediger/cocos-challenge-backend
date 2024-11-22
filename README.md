@@ -37,9 +37,10 @@ $ cd api
 
 ***Default actions* para no frenar el desarrollo:**
 
-- Enviada consulta sobre calculo de rendimiento. Al momento se simplifico el calculo al momento actual, esto es, se compara valor de la tenencia actual respecto al monto total invertido en las órdenes de compra.
+- ~~Enviada consulta sobre calculo de rendimiento. Al momento se simplificó el cálculo al momento actual, esto es, se compara valor de la tenencia actual respecto al monto total invertido en las órdenes de compra.~~ Recibida la respuesta, se prioriza implementación de envío de órdenes.
 
 **Decisiones de diseño para agilizar el desarrollo:**
 
 - No se tuvo en cuenta la validación del id usuario para la consulta de portofolio u orden.
 - Se utilizaron tipos primitivos en lugar de `value objects` en entidades simples (por ejemplo: moneda, porcentaje).
+- Para simplificar el desarrollo, no se tiene en cuenta un paginado para la consulta de instrumentos

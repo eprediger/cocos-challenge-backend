@@ -22,7 +22,5 @@ import { MarketdataModule } from './marketdata/marketdata.module';
     OrderModule,
     MarketdataModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

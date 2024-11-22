@@ -1,44 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Marketdata } from 'src/marketdata/marketdata.entity';
-import { Order, OrderSide, OrderStatus } from 'src/order/order.entity';
+import { OrderService } from 'src/order/order.service';
 import { In, Repository } from 'typeorm';
-import { Portfolio } from './portfolio';
 import { Instrument } from 'src/instruments/instrument.entity';
+import { Marketdata } from 'src/marketdata/marketdata.entity';
+import { OrderSide, OrderStatus } from 'src/order/order.entity';
+import { Portfolio } from './portfolio';
+import { MarketdataService } from 'src/marketdata/marketdata.service';
 
 @Injectable()
 export class PortfolioService {
   public constructor(
-    @InjectRepository(Order)
-    private readonly ordersRepo: Repository<Order>,
-    @InjectRepository(Marketdata)
-    private readonly marketDataRepo: Repository<Marketdata>,
+    private readonly orderService: OrderService,
+    private readonly marketDataService: MarketdataService,
     @InjectRepository(Instrument)
     private readonly instrumentRepo: Repository<Instrument>,
   ) {}
 
   public async findUserPortfolio(userId: number): Promise<Portfolio> {
-    const orders = await this.ordersRepo.find({
-      where: {
-        userid: userId,
-        status: In([OrderStatus.FILLED, OrderStatus.NEW]),
-      },
-      order: {
-        datetime: 'ASC',
-      },
-    });
-
-    const marketdata = await this.marketDataRepo.find({
-      relations: {
-        instrument: true,
-      },
-    });
-
-    const mostRecentDate = marketdata
-      .map((m) => m.date)
-      .reduce((prev, curr) => {
-        return curr > prev ? curr : prev;
-      }, marketdata[0].date);
+    const orders = await this.orderService.findUserOrders(userId, [
+      OrderStatus.FILLED,
+      OrderStatus.NEW,
+    ]);
+    const mostRecentDate = await this.marketDataService.getMostRecentDate();
 
     const userAssetsMovements = await this.instrumentRepo.find({
       where: {
@@ -63,8 +47,6 @@ export class PortfolioService {
       },
     });
 
-    const portfolio = new Portfolio(orders, userAssetsMovements);
-
-    return portfolio;
+    return new Portfolio(orders, userAssetsMovements);
   }
 }

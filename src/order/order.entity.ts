@@ -1,7 +1,14 @@
 import { Instrument } from 'src/instruments/instrument.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-enum OrderType {
+export enum OrderType {
   MARKET = 'MARKET',
   LIMIT = 'LIMIT',
 }
@@ -22,7 +29,7 @@ export enum OrderStatus {
 
 @Entity({ name: 'orders' })
 export class Order {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -46,7 +53,7 @@ export class Order {
   @Column()
   status: OrderStatus;
 
-  @Column({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamp' })
   datetime: string;
 
   @ManyToOne(() => Instrument, (i) => i.orders)

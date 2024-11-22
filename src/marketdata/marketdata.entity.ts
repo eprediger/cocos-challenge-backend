@@ -1,5 +1,12 @@
 import { Instrument } from 'src/instruments/instrument.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity({ name: 'marketdata' })
 export class Marketdata {
@@ -24,7 +31,7 @@ export class Marketdata {
   @Column()
   previousclose: number;
 
-  @Column({ type: 'date' })
+  @CreateDateColumn({ type: 'date' })
   date: string;
 
   @ManyToOne(() => Instrument, (i) => i.marketdata)

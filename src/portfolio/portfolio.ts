@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Order } from 'src/order/order.entity';
-import { Instrument } from '../instruments/instrument.entity';
+import { Instrument } from 'src/instruments/instrument.entity';
 import { Asset } from './asset';
 
 export class Portfolio {
@@ -10,9 +10,7 @@ export class Portfolio {
   @ApiProperty()
   availableForTrading: number;
 
-  @ApiProperty(
-    {type: [Asset]}
-  )
+  @ApiProperty({ type: [Asset] })
   assetHoldings: Asset[];
 
   public constructor(orders: Order[], detailedInstruments: Instrument[]) {
