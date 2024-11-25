@@ -28,7 +28,7 @@ export class PortfolioService {
       where: {
         orders: {
           userid: userId,
-          status: In([OrderStatus.FILLED, OrderStatus.NEW]),
+          status: In([OrderStatus.FILLED]),
           side: In([OrderSide.BUY, OrderSide.SELL]),
         },
         marketdata: {
