@@ -8,16 +8,11 @@ import { MarketdataService } from 'src/marketdata/marketdata.service';
 import { Portfolio } from 'src/portfolio/portfolio';
 import { PortfolioService } from 'src/portfolio/portfolio.service';
 import { Repository } from 'typeorm';
-import {
-  CashAmountTradeDto,
-  CreateOrderDto
-} from './CreateOrderDto';
+import { CashAmountTradeDto, CreateOrderDto } from './CreateOrderDto';
 import { CreateOrderDtoExample } from './CreateOrderDtoExample';
 import { Order, OrderSide, OrderStatus, OrderType } from './order.entity';
-import {
-  InvalidStateForCancellationError,
-  OrderService,
-} from './order.service';
+import { OrderService } from './order.service';
+import { InvalidStateForCancellationError } from './InvalidStateForCancellationError';
 
 describe('Order', () => {
   let service: OrderService;

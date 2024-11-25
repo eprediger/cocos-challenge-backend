@@ -5,19 +5,8 @@ import { MarketdataService } from 'src/marketdata/marketdata.service';
 import { PortfolioService } from 'src/portfolio/portfolio.service';
 import { In, Repository } from 'typeorm';
 import { CreateOrderDto } from './CreateOrderDto';
-import { Order, OrderSide, OrderStatus } from './order.entity';
-
-class InsufficientFundsError extends Error {
-  constructor() {
-    super('Insufficient funds to carry out this trade.');
-  }
-}
-
-export class InvalidStateForCancellationError extends Error {
-  constructor() {
-    super('Only order in NEW state can de cancelled.');
-  }
-}
+import { Order, OrderStatus, OrderType } from './order.entity';
+import { InvalidStateForCancellationError } from './InvalidStateForCancellationError';
 
 @Injectable()
 export class OrderService {
@@ -78,10 +67,16 @@ export class OrderService {
       userid: newOrder.userId,
       instrumentid: newOrder.instrumentId,
       size: newOrder.trade.stockSize(instrumentMarketdata),
-      price: instrumentMarketdata.close, // TODO: solo para MARKET
+      price:
+        newOrder.type === OrderType.MARKET
+          ? instrumentMarketdata.close
+          : newOrder.limitPrice,
       type: newOrder.type,
       side: newOrder.side,
-      status: OrderStatus.FILLED,
+      status:
+        newOrder.type === OrderType.MARKET
+          ? OrderStatus.FILLED
+          : OrderStatus.NEW,
     });
 
     return this.repo.save(validOrder);

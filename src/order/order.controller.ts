@@ -15,6 +15,7 @@ import {
   StockAmountTradeDto,
 } from './CreateOrderDto';
 import { OrderService } from './order.service';
+import { Order } from './order.entity';
 
 @Controller('orders')
 export class OrderController {
@@ -50,7 +51,7 @@ export class OrderController {
       },
     })
     body: CreateOrderDto,
-  ): Promise<unknown> {
+  ): Promise<Order> {
     return this.service.createOrder(body);
   }
 }

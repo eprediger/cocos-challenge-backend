@@ -1,4 +1,7 @@
-import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  getSchemaPath
+} from '@nestjs/swagger';
 import { IsPositive, ValidateIf } from 'class-validator';
 import { Marketdata } from 'src/marketdata/marketdata.entity';
 import { OrderSide, OrderType } from './order.entity';
