@@ -1,20 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Instrument } from 'src/instruments/instrument.entity';
+import { MarketdataService } from 'src/marketdata/marketdata.service';
+import { OrderSide, OrderStatus } from 'src/order/order.entity';
 import { OrderService } from 'src/order/order.service';
 import { In, Repository } from 'typeorm';
-import { Instrument } from 'src/instruments/instrument.entity';
-import { Marketdata } from 'src/marketdata/marketdata.entity';
-import { OrderSide, OrderStatus } from 'src/order/order.entity';
 import { Portfolio } from './portfolio';
-import { MarketdataService } from 'src/marketdata/marketdata.service';
 
 @Injectable()
 export class PortfolioService {
   public constructor(
-    private readonly orderService: OrderService,
     private readonly marketDataService: MarketdataService,
     @InjectRepository(Instrument)
     private readonly instrumentRepo: Repository<Instrument>,
+    @Inject(forwardRef(() => OrderService))
+    private readonly orderService: OrderService,
   ) {}
 
   public async findUserPortfolio(userId: number): Promise<Portfolio> {
