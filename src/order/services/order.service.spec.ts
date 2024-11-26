@@ -5,18 +5,17 @@ import { Instrument } from 'src/instruments/model/instrument.entity';
 import { InstrumentsService } from 'src/instruments/services/instruments.service';
 import { Marketdata } from 'src/marketdata/model/marketdata.entity';
 import { MarketdataService } from 'src/marketdata/services/marketdata.service';
-import { Portfolio } from 'src/portfolio/portfolio';
-import { PortfolioService } from 'src/portfolio/portfolio.service';
+import { Portfolio } from 'src/portfolio/model/portfolio';
+import { PortfolioService } from 'src/portfolio/services/portfolio.service';
 import { Repository } from 'typeorm';
 import { CreateOrderDtoExample } from '../CreateOrderDtoExample';
-import { CashAmountTradeDto, CreateOrderDto } from '../dtos/CreateOrderDto';
-import { InvalidStateForCancellationError } from '../errors/InvalidStateForCancellationError';
-import {
-  Order,
-  OrderSide,
-  OrderStatus,
-  OrderType,
-} from '../model/order.entity';
+import { CreateOrderDto } from '../dtos/CreateOrderDto';
+import { CashAmountTradeDto } from '../dtos/CashAmountTradeDto';
+import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
+import { Order } from '../model/order.entity';
+import { OrderType } from '../model/constants/OrderType';
+import { OrderSide } from '../model/constants/OrderSide';
+import { OrderStatus } from '../model/constants/OrderStatus';
 import { OrderService } from './order.service';
 
 describe('Order', () => {

@@ -1,60 +1,10 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
-import { IsPositive, ValidateIf } from 'class-validator';
-import { OrderSide, OrderType } from '../model/order.entity';
-import { Marketdata } from 'src/marketdata/model/marketdata.entity';
-
-export enum AmountType {
-  STOCK = 'STOCK',
-  CASH = 'CASH',
-}
-
-export interface Tradeable {
-  totalTradeCashAmount(): number;
-  stockSize(marketdata: Marketdata): number;
-  totalStockPrice(marketdata: Marketdata): number;
-}
-
-export class CashAmountTradeDto implements Tradeable {
-  @ApiProperty()
-  @IsPositive()
-  amount: number;
-
-  public totalTradeCashAmount(): number {
-    return this.amount;
-  }
-
-  // TODO: create test case when amount < marketdata.close => stockSize == 0;
-  public stockSize(marketdata: Marketdata): number {
-    return Math.floor(this.amount / marketdata.close);
-  }
-
-  //@Exclude()
-  public totalStockPrice(marketdata: Marketdata): number {
-    return this.stockSize(marketdata) * marketdata.close;
-  }
-}
-export class StockAmountTradeDto implements Tradeable {
-  @ApiProperty()
-  @IsPositive()
-  amount: number;
-
-  @ApiProperty()
-  @IsPositive()
-  price: number;
-
-  public totalTradeCashAmount(): number {
-    return this.amount * this.price;
-  }
-
-  public stockSize(marketdata: Marketdata): number {
-    return this.amount;
-  }
-
-  //@Exclude()
-  public totalStockPrice(marketdata: Marketdata): number {
-    return this.amount * marketdata.close;
-  }
-}
+import { ValidateIf } from 'class-validator';
+import { OrderType } from '../model/constants/OrderType';
+import { OrderSide } from '../model/constants/OrderSide';
+import { Tradeable } from './interfaces/Tradeable';
+import { CashAmountTradeDto } from './CashAmountTradeDto';
+import { StockAmountTradeDto } from './StockAmountTradeDto';
 
 export class CreateOrderDto {
   @ApiProperty()

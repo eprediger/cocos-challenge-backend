@@ -7,25 +7,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
-export enum OrderType {
-  MARKET = 'MARKET',
-  LIMIT = 'LIMIT',
-}
-
-export enum OrderSide {
-  BUY = 'BUY',
-  CASH_OUT = 'CASH_OUT',
-  CASH_IN = 'CASH_IN',
-  SELL = 'SELL',
-}
-
-export enum OrderStatus {
-  FILLED = 'FILLED',
-  NEW = 'NEW',
-  REJECTED = 'REJECTED',
-  CANCELLED = 'CANCELLED',
-}
+import { OrderStatus } from './constants/OrderStatus';
+import { OrderSide } from './constants/OrderSide';
+import { OrderType } from './constants/OrderType';
 
 @Entity({ name: 'orders' })
 export class Order {

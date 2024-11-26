@@ -5,7 +5,7 @@ import { Instrument } from 'src/instruments/model/instrument.entity';
 import { InstrumentsService } from 'src/instruments/services/instruments.service';
 import { ApiPaginatedResponse } from '../../common/pagination/decorators/ApiPaginatedResponse';
 import { InstrumentQuery } from '../dtos/InstrumentQuery';
-import { PaginationParamsDto } from '../dtos/PaginationParamsDto';
+import { PaginationParamsDto } from '../../common/pagination/dtos/PaginationParamsDto';
 
 @Controller('instruments')
 @ApiExtraModels(PaginatedDto)

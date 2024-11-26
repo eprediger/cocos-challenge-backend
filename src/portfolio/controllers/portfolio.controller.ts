@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
-import { Portfolio } from './portfolio';
-import { PortfolioService } from './portfolio.service';
+import { Portfolio } from '../model/portfolio';
+import { PortfolioService } from '../services/portfolio.service';
 
 @Controller('portfolio')
 export class PortfolioController {

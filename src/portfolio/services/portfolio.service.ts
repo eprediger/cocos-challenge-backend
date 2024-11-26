@@ -2,10 +2,11 @@ import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Instrument } from 'src/instruments/model/instrument.entity';
 import { MarketdataService } from 'src/marketdata/services/marketdata.service';
-import { OrderSide, OrderStatus } from 'src/order/model/order.entity';
+import { OrderSide } from 'src/order/model/constants/OrderSide';
+import { OrderStatus } from 'src/order/model/constants/OrderStatus';
 import { OrderService } from 'src/order/services/order.service';
 import { In, Repository } from 'typeorm';
-import { Portfolio } from './portfolio';
+import { Portfolio } from '../model/portfolio';
 
 @Injectable()
 export class PortfolioService {

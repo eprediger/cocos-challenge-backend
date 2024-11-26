@@ -1,4 +1,4 @@
-import { PaginationParamsDto } from 'src/instruments/dtos/PaginationParamsDto';
+import { PaginationParamsDto } from 'src/common/pagination/dtos/PaginationParamsDto';
 
 export type PageMetaDtoParameters = {
   paginationParamsDto: PaginationParamsDto;

@@ -4,7 +4,7 @@ import { ILike, Repository } from 'typeorm';
 import { PageMetaDto } from '../../common/pagination/dtos/PageMetaDto';
 import { InstrumentQuery } from '../dtos/InstrumentQuery';
 import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
-import { PaginationParamsDto } from '../dtos/PaginationParamsDto';
+import { PaginationParamsDto } from '../../common/pagination/dtos/PaginationParamsDto';
 import { Instrument } from '../model/instrument.entity';
 
 @Injectable()
