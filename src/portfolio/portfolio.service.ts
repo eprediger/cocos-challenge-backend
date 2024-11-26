@@ -1,9 +1,9 @@
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Instrument } from 'src/instruments/instrument.entity';
-import { MarketdataService } from 'src/marketdata/marketdata.service';
-import { OrderSide, OrderStatus } from 'src/order/order.entity';
-import { OrderService } from 'src/order/order.service';
+import { Instrument } from 'src/instruments/model/instrument.entity';
+import { MarketdataService } from 'src/marketdata/services/marketdata.service';
+import { OrderSide, OrderStatus } from 'src/order/model/order.entity';
+import { OrderService } from 'src/order/services/order.service';
 import { In, Repository } from 'typeorm';
 import { Portfolio } from './portfolio';
 

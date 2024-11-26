@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Order } from 'src/order/order.entity';
-import { Instrument } from 'src/instruments/instrument.entity';
 import { Asset } from './asset';
+import { Instrument } from 'src/instruments/model/instrument.entity';
+import { Order } from 'src/order/model/order.entity';
 
 export class Portfolio {
   @ApiProperty()

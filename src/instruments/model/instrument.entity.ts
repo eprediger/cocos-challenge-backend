@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Marketdata } from 'src/marketdata/marketdata.entity';
-import { Order } from 'src/order/order.entity';
+import { Marketdata } from 'src/marketdata/model/marketdata.entity';
+import { Order } from 'src/order/model/order.entity';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'instruments' })

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
-import { Instrument } from './instrument.entity';
-import { InstrumentQuery } from './InstrumentQuery';
+import { InstrumentQuery } from '../dtos/InstrumentQuery';
+import { Instrument } from '../model/instrument.entity';
 
 @Injectable()
 export class InstrumentsService {

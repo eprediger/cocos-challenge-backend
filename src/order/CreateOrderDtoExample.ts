@@ -3,8 +3,8 @@ import {
   CreateOrderDto,
   StockAmountTradeDto,
   Tradeable,
-} from './CreateOrderDto';
-import { OrderSide, OrderStatus, OrderType } from './order.entity';
+} from './dtos/CreateOrderDto';
+import { OrderSide, OrderStatus, OrderType } from './model/order.entity';
 
 export class CreateOrderDtoExample {
   private props: any = {

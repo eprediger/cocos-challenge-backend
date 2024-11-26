@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Marketdata } from './marketdata.entity';
+import { Marketdata } from '../model/marketdata.entity';
 
 @Injectable()
 export class MarketdataService {

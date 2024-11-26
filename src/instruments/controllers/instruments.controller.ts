@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiQuery } from '@nestjs/swagger';
-import { Instrument } from './instrument.entity';
-import { InstrumentsService } from './instruments.service';
+import { Instrument } from 'src/instruments/model/instrument.entity';
+import { InstrumentsService } from 'src/instruments/services/instruments.service';
 
 @Controller('instruments')
 export class InstrumentsController {

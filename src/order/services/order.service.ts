@@ -1,12 +1,12 @@
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { InstrumentsService } from 'src/instruments/instruments.service';
-import { MarketdataService } from 'src/marketdata/marketdata.service';
+import { InstrumentsService } from 'src/instruments/services/instruments.service';
+import { MarketdataService } from 'src/marketdata/services/marketdata.service';
 import { PortfolioService } from 'src/portfolio/portfolio.service';
 import { In, Repository } from 'typeorm';
-import { CreateOrderDto } from './CreateOrderDto';
-import { Order, OrderStatus, OrderType } from './order.entity';
-import { InvalidStateForCancellationError } from './InvalidStateForCancellationError';
+import { CreateOrderDto } from '../dtos/CreateOrderDto';
+import { InvalidStateForCancellationError } from '../errors/InvalidStateForCancellationError';
+import { Order, OrderStatus, OrderType } from '../model/order.entity';
 
 @Injectable()
 export class OrderService {

@@ -1,4 +1,5 @@
-import { Instrument } from 'src/instruments/instrument.entity';
+
+import { Instrument } from 'src/instruments/model/instrument.entity';
 import {
   Column,
   CreateDateColumn,

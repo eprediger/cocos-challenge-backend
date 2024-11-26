@@ -2,10 +2,12 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
+  Param,
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiBadRequestResponse, ApiOkResponse } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import {
@@ -13,9 +15,9 @@ import {
   CashAmountTradeDto,
   CreateOrderDto,
   StockAmountTradeDto,
-} from './CreateOrderDto';
-import { OrderService } from './order.service';
-import { Order } from './order.entity';
+} from '../dtos/CreateOrderDto';
+import { OrderService } from '../services/order.service';
+import { Order } from '../model/order.entity';
 
 @Controller('orders')
 export class OrderController {
@@ -53,5 +55,38 @@ export class OrderController {
     body: CreateOrderDto,
   ): Promise<Order> {
     return this.service.createOrder(body);
+  }
+
+  @Delete('/:orderId')
+  @ApiParam({
+    name: 'orderId',
+    type: 'number',
+    description: 'The id of the order to be cancelled',
+  })
+  @ApiOkResponse({
+    description: 'The cancelled order',
+    type: Order,
+    example: {
+      id: 5,
+      userid: 1,
+      instrumentid: 45,
+      size: 50,
+      price: 710,
+      type: "LIMIT",
+      side: "BUY",
+      status: "CANCELLED",
+      datetime: "2023-07-12T15:14:20.000Z"
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'There was an error with the request data',
+    example: {
+      message: "Only orders in NEW state can de cancelled.",
+      error: "Bad Request",
+      statusCode: 400
+    }
+  })
+  public async cancelOrder(@Param('orderId') id: number): Promise<Order> {
+    return this.service.cancelOrder(id);
   }
 }
