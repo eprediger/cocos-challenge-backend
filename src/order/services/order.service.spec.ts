@@ -11,7 +11,12 @@ import { Repository } from 'typeorm';
 import { CreateOrderDtoExample } from '../CreateOrderDtoExample';
 import { CashAmountTradeDto, CreateOrderDto } from '../dtos/CreateOrderDto';
 import { InvalidStateForCancellationError } from '../errors/InvalidStateForCancellationError';
-import { Order, OrderSide, OrderStatus, OrderType } from '../model/order.entity';
+import {
+  Order,
+  OrderSide,
+  OrderStatus,
+  OrderType,
+} from '../model/order.entity';
 import { OrderService } from './order.service';
 
 describe('Order', () => {

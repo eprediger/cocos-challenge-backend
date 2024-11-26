@@ -4,7 +4,10 @@
 
 ```bash
 $ npm install
+$ cp .env.example .env
 ```
+
+Editar el archivo `.env` agregando los valores a las variables
 
 ## Compilación y ejecución
 
@@ -43,4 +46,4 @@ $ cd api
 
 - No se tuvo en cuenta la validación del id usuario para la consulta de portofolio u orden.
 - Se utilizaron tipos primitivos en lugar de `value objects` en entidades simples (por ejemplo: moneda, porcentaje).
-- Para simplificar el desarrollo, no se tiene en cuenta un paginado para la consulta de instrumentos
+- ~~Para simplificar el desarrollo, no se tiene en cuenta un paginado para la consulta de instrumentos~~

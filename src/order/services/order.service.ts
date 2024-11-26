@@ -88,7 +88,6 @@ export class OrderService {
     });
 
     if (order !== null) {
-      console.log(`estado orden: ${order.status}`);
       if (order.status !== OrderStatus.NEW) {
         throw new InvalidStateForCancellationError();
       }
