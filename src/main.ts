@@ -6,11 +6,19 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true,
+      transform: true, // Automatically transform payloads to DTO objects
+      whitelist: true, // Strips properties that are not in the DTO
+      enableDebugMessages: true, // Optional: for debugging
+      transformOptions: {
+        exposeDefaultValues: true,
+        enableImplicitConversion: true,
+      },
     }),
   );
+
   const configService = app.get(ConfigService);
 
   const config = new DocumentBuilder()
@@ -20,7 +28,7 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('openapi', app, documentFactory);
 
-  const port = configService.get('PORT');
+  const port = configService.get<number>('PORT');
   await app.listen(port);
 }
 

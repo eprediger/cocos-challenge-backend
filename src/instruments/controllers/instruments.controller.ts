@@ -1,29 +1,20 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiExtraModels, ApiQuery } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Query
+} from '@nestjs/common';
 import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
 import { Instrument } from 'src/instruments/model/instrument.entity';
 import { InstrumentsService } from 'src/instruments/services/instruments.service';
 import { ApiPaginatedResponse } from '../../common/pagination/decorators/ApiPaginatedResponse';
-import { InstrumentQuery } from '../dtos/InstrumentQuery';
 import { PaginationParamsDto } from '../../common/pagination/dtos/PaginationParamsDto';
+import { InstrumentQuery } from '../dtos/InstrumentQuery';
 
 @Controller('instruments')
-@ApiExtraModels(PaginatedDto)
 export class InstrumentsController {
   public constructor(private readonly service: InstrumentsService) {}
 
   @Get()
-  @ApiQuery({ type: PaginationParamsDto })
-  @ApiQuery({
-    name: 'ticker',
-    required: false,
-    description: 'A instrument ticker',
-  })
-  @ApiQuery({
-    name: 'name',
-    required: false,
-    description: 'A partial instrument name to be match',
-  })
   @ApiPaginatedResponse(Instrument, {
     description: 'A paginated list of instruments',
     example: {
@@ -46,8 +37,9 @@ export class InstrumentsController {
     },
   })
   find(
-    @Query() params: InstrumentQuery & PaginationParamsDto,
+    @Query() params: InstrumentQuery,
+    @Query() pagination: PaginationParamsDto,
   ): Promise<PaginatedDto<Instrument>> {
-    return this.service.getInstruments(params);
+    return this.service.getInstruments(params, pagination);
   }
 }

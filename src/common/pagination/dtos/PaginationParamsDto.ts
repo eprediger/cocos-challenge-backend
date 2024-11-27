@@ -13,7 +13,7 @@ export class PaginationParamsDto {
   @ApiPropertyOptional({ enum: PageOrder, default: PageOrder.ASC })
   @IsEnum(PageOrder)
   @IsOptional()
-  readonly order: PageOrder = PageOrder.ASC;
+  readonly order?: PageOrder = PageOrder.ASC;
 
   @ApiPropertyOptional({
     minimum: PAGE_MINIMUM,

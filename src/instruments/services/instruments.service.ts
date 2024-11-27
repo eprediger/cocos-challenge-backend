@@ -15,21 +15,22 @@ export class InstrumentsService {
   ) {}
 
   public async getInstruments(
-    query: PaginationParamsDto & InstrumentQuery,
+    params: InstrumentQuery,
+    pagination: PaginationParamsDto,
   ): Promise<PaginatedDto<Instrument>> {
     const queryBuilder = this.repo.createQueryBuilder('instrument');
 
     queryBuilder
-      .orderBy('instrument.id', query.order)
-      .skip(query.skip)
-      .take(query.take);
+      .orderBy('instrument.id', pagination.order)
+      .skip(pagination.skip)
+      .take(pagination.take);
 
-    if (query.ticker) {
-      queryBuilder.andWhere({ ticker: ILike(`%${query.ticker}%`) });
+    if (params.ticker) {
+      queryBuilder.andWhere({ ticker: ILike(`%${params.ticker}%`) });
     }
 
-    if (query.name) {
-      queryBuilder.andWhere({ name: ILike(`%${query.name}%`) });
+    if (params.name) {
+      queryBuilder.andWhere({ name: ILike(`%${params.name}%`) });
     }
 
     const [itemCount, { entities }] = await Promise.all([
@@ -38,10 +39,10 @@ export class InstrumentsService {
     ]);
 
     const paginationParamsDto: PaginationParamsDto = {
-      order: query.order,
-      page: query.page,
-      take: query.take,
-      skip: query.skip,
+      order: pagination.order,
+      page: pagination.page,
+      take: pagination.take,
+      skip: pagination.skip,
     };
 
     const pageMetaDto = new PageMetaDto({ itemCount, paginationParamsDto });
