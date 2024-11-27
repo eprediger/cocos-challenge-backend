@@ -1,8 +1,4 @@
-import {
-  Controller,
-  Get,
-  Query
-} from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
 import { Instrument } from 'src/instruments/model/instrument.entity';
 import { InstrumentsService } from 'src/instruments/services/instruments.service';

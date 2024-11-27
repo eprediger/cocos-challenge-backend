@@ -9,13 +9,13 @@ import { Portfolio } from 'src/portfolio/model/portfolio';
 import { PortfolioService } from 'src/portfolio/services/portfolio.service';
 import { Repository } from 'typeorm';
 import { CreateOrderDtoExample } from '../CreateOrderDtoExample';
-import { CreateOrderDto } from '../dtos/CreateOrderDto';
 import { CashAmountTradeDto } from '../dtos/CashAmountTradeDto';
-import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
-import { Order } from '../model/order.entity';
-import { OrderType } from '../model/constants/OrderType';
+import { CreateOrderDto } from '../dtos/CreateOrderDto';
 import { OrderSide } from '../model/constants/OrderSide';
 import { OrderStatus } from '../model/constants/OrderStatus';
+import { OrderType } from '../model/constants/OrderType';
+import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
+import { Order } from '../model/order.entity';
 import { OrderService } from './order.service';
 
 describe('Order', () => {

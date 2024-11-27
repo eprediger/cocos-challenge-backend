@@ -5,9 +5,9 @@ import { MarketdataService } from 'src/marketdata/services/marketdata.service';
 import { PortfolioService } from 'src/portfolio/services/portfolio.service';
 import { In, Repository } from 'typeorm';
 import { CreateOrderDto } from '../dtos/CreateOrderDto';
-import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
 import { OrderStatus } from '../model/constants/OrderStatus';
 import { OrderType } from '../model/constants/OrderType';
+import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
 import { Order } from '../model/order.entity';
 
 @Injectable()
