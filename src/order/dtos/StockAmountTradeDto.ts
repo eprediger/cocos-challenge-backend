@@ -1,15 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsPositive } from 'class-validator';
+import { IsEnum, IsInt, IsPositive } from 'class-validator';
 import { Marketdata } from 'src/marketdata/model/marketdata.entity';
+import { AmountType } from './constants/AmountType';
 import { Tradeable } from './interfaces/Tradeable';
 
 export class StockAmountTradeDto implements Tradeable {
+  @ApiProperty({ enum: AmountType, default: AmountType.STOCK })
+  @IsEnum(AmountType)
+  amountType: AmountType = AmountType.STOCK;
+
   @ApiProperty()
   @IsPositive()
+  @IsInt()
   amount: number;
 
   @ApiProperty()
   @IsPositive()
+  // TODO: documentar para qué era el price, tal vez haya que borrarlo
   price: number;
 
   public totalTradeCashAmount(): number {

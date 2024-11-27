@@ -1,5 +1,12 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
-import { IsEnum, IsPositive, ValidateIf } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsEnum,
+  IsInt,
+  IsNumber,
+  IsPositive,
+  ValidateIf,
+} from 'class-validator';
 import { OrderSide } from '../model/constants/OrderSide';
 import { OrderType } from '../model/constants/OrderType';
 import { CashAmountTradeDto } from './CashAmountTradeDto';
@@ -8,7 +15,8 @@ import { Tradeable } from './interfaces/Tradeable';
 
 export class CreateOrderDto {
   @ApiProperty()
-  @IsPositive()
+  @IsInt()
+  @Type(() => Number)
   userId: number;
 
   @ApiProperty({
@@ -18,7 +26,8 @@ export class CreateOrderDto {
   side: OrderSide;
 
   @ApiProperty()
-  @IsPositive()
+  @IsInt()
+  @Type(() => Number)
   instrumentId: number;
 
   @ApiProperty({
@@ -35,6 +44,9 @@ export class CreateOrderDto {
   })
   trade: Tradeable;
 
-  @ValidateIf((body) => body.offer === OrderType.LIMIT)
+  @ValidateIf((o) => o.type === OrderType.LIMIT)
+  @IsPositive()
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Type(() => Number)
   limitPrice?: number;
 }

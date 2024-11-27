@@ -10,7 +10,6 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true, // Automatically transform payloads to DTO objects
-      whitelist: true, // Strips properties that are not in the DTO
       enableDebugMessages: true, // Optional: for debugging
       transformOptions: {
         exposeDefaultValues: true,

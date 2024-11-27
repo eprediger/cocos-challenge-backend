@@ -10,6 +10,7 @@ import {
 import {
   ApiBadRequestResponse,
   ApiBody,
+  ApiExtraModels,
   ApiOkResponse,
   ApiParam,
 } from '@nestjs/swagger';
@@ -23,6 +24,7 @@ import { Order } from '../model/order.entity';
 import { OrderService } from '../services/order.service';
 
 @Controller('orders')
+@ApiExtraModels(CashAmountTradeDto, StockAmountTradeDto)
 export class OrderController {
   public constructor(private readonly service: OrderService) {}
 
@@ -35,14 +37,19 @@ export class OrderController {
       transform: async (value) => {
         let transformed: CashAmountTradeDto | StockAmountTradeDto;
 
-        switch (value.trade.amountType) {
+        const amountType = value.trade.amountType;
+
+        switch (amountType) {
           case AmountType.CASH:
             transformed = plainToInstance(CashAmountTradeDto, value.trade);
             break;
           case AmountType.STOCK:
             transformed = plainToInstance(StockAmountTradeDto, value.trade);
+            break;
           default:
-            throw new BadRequestException('Invalid trade amount type');
+            throw new BadRequestException(
+              `'${amountType}' is not a valid trade amount type`,
+            );
         }
 
         const validation = await validate(transformed);
@@ -52,7 +59,8 @@ export class OrderController {
           throw exceptionFactory(validation);
         }
 
-        return transformed;
+        value.trade = transformed;
+        return value;
       },
     })
     body: CreateOrderDto,
