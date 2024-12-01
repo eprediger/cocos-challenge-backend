@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USERNAME?Error}
+      - POSTGRES_PASSWORD=${DB_PASSWORD?Error}
+      - POSTGRES_DB=${DB_DATABASE?Error}
+    networks:
+      - cocos-net
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+        - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - cocos-net
+
+networks:
+  cocos-net:
+    driver: bridge
+
+volumes:
+  pg-data:
+  cache:
+    driver: local

@@ -21,7 +21,7 @@ import { PortfolioModule } from './portfolio/portfolio.module';
 
           if (errors.length > 0) {
             throw new Error(
-              `Configuration validation failed: ${JSON.stringify(errors)}`,
+              `Configuration validation failed: ${errors.toString()}`,
             );
           }
 
