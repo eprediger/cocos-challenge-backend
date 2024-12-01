@@ -5,7 +5,7 @@ import {
   ApiResponseNoStatusOptions,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
+import { PaginatedDto } from 'src/common/pagination/dtos/paginated.dto';
 
 export const ApiPaginatedResponse = <TModel extends Type<any>>(
   model: TModel,

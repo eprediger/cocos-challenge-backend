@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
+import { PaginatedDto } from 'src/common/pagination/dtos/paginated.dto';
 import { ILike, Repository } from 'typeorm';
-import { PageMetaDto } from '../../common/pagination/dtos/PageMetaDto';
-import { PaginationParamsDto } from '../../common/pagination/dtos/PaginationParamsDto';
-import { InstrumentQuery } from '../dtos/InstrumentQuery';
+import { PageMetaDto } from '../../common/pagination/dtos/page-meta.dto';
+import { PaginationParamsDto } from '../../common/pagination/dtos/pagination-params.dto';
+import { InstrumentQuery } from '../dtos/instrument-query.dto';
 import { Instrument } from '../model/instrument.entity';
 
 @Injectable()

@@ -7,11 +7,11 @@ import {
   IsPositive,
   ValidateIf,
 } from 'class-validator';
-import { OrderSide } from '../model/constants/OrderSide';
-import { OrderType } from '../model/constants/OrderType';
-import { CashAmountTradeDto } from './CashAmountTradeDto';
-import { StockAmountTradeDto } from './StockAmountTradeDto';
+import { OrderSide } from '../model/constants/order-side';
+import { OrderType } from '../model/constants/order-type';
+import { CashAmountTradeDto } from './cash-amount-trade.dto';
 import { Tradeable } from './interfaces/Tradeable';
+import { StockAmountTradeDto } from './stock-amount-trade.dto';
 
 export class CreateOrderDto {
   @ApiProperty()

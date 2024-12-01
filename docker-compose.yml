@@ -1,6 +1,7 @@
 version: "3.3"
 services:
   db:
+    container_name: cocos_db
     image: postgres:17
     restart: unless-stopped
     ports:
@@ -14,6 +15,7 @@ services:
     networks:
       - cocos-net
   api:
+    container_name: cocos_api
     build:
       context: .
       dockerfile: Dockerfile

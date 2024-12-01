@@ -7,9 +7,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OrderSide } from './constants/OrderSide';
-import { OrderStatus } from './constants/OrderStatus';
-import { OrderType } from './constants/OrderType';
+import { OrderSide } from './constants/order-side';
+import { OrderStatus } from './constants/order-status';
+import { OrderType } from './constants/order-type';
 
 @Entity({ name: 'orders' })
 export class Order {

@@ -19,7 +19,7 @@ export class Configuration {
   @IsNotEmpty()
   readonly VERSION: string = process.env.npm_package_version;
 
-  @IsUrl()
+  @IsUrl({ require_tld: false })
   @IsString()
   @IsNotEmpty()
   readonly DB_HOST: string;

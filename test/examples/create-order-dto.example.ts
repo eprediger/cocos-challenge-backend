@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer';
-import { CreateOrderDto } from './dtos/CreateOrderDto';
-import { StockAmountTradeDto } from './dtos/StockAmountTradeDto';
-import { Tradeable } from './dtos/interfaces/Tradeable';
-import { OrderSide } from './model/constants/OrderSide';
-import { OrderStatus } from './model/constants/OrderStatus';
-import { OrderType } from './model/constants/OrderType';
+import { CreateOrderDto } from '../../src/order/dtos/create-order.dto';
+import { Tradeable } from '../../src/order/dtos/interfaces/Tradeable';
+import { StockAmountTradeDto } from '../../src/order/dtos/stock-amount-trade.dto';
+import { OrderSide } from '../../src/order/model/constants/order-side';
+import { OrderStatus } from '../../src/order/model/constants/order-status';
+import { OrderType } from '../../src/order/model/constants/order-type';
 
 export class CreateOrderDtoExample {
   private props: any = {

@@ -16,10 +16,10 @@ import {
 } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { CashAmountTradeDto } from '../dtos/CashAmountTradeDto';
-import { CreateOrderDto } from '../dtos/CreateOrderDto';
-import { StockAmountTradeDto } from '../dtos/StockAmountTradeDto';
+import { CashAmountTradeDto } from '../dtos/cash-amount-trade.dto';
 import { AmountType } from '../dtos/constants/AmountType';
+import { CreateOrderDto } from '../dtos/create-order.dto';
+import { StockAmountTradeDto } from '../dtos/stock-amount-trade.dto';
 import { Order } from '../model/order.entity';
 import { OrderService } from '../services/order.service';
 

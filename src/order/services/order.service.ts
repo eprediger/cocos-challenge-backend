@@ -4,10 +4,10 @@ import { InstrumentsService } from 'src/instruments/services/instruments.service
 import { MarketdataService } from 'src/marketdata/services/marketdata.service';
 import { PortfolioService } from 'src/portfolio/services/portfolio.service';
 import { In, Repository } from 'typeorm';
-import { CreateOrderDto } from '../dtos/CreateOrderDto';
-import { OrderStatus } from '../model/constants/OrderStatus';
-import { OrderType } from '../model/constants/OrderType';
-import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
+import { CreateOrderDto } from '../dtos/create-order.dto';
+import { OrderStatus } from '../model/constants/order-status';
+import { OrderType } from '../model/constants/order-type';
+import { InvalidStateForCancellationError } from '../model/errors/invalid-state-for-cancellation.error';
 import { Order } from '../model/order.entity';
 
 @Injectable()

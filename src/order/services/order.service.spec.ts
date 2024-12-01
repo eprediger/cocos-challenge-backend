@@ -8,13 +8,13 @@ import { MarketdataService } from 'src/marketdata/services/marketdata.service';
 import { Portfolio } from 'src/portfolio/model/portfolio';
 import { PortfolioService } from 'src/portfolio/services/portfolio.service';
 import { Repository } from 'typeorm';
-import { CreateOrderDtoExample } from '../CreateOrderDtoExample';
-import { CashAmountTradeDto } from '../dtos/CashAmountTradeDto';
-import { CreateOrderDto } from '../dtos/CreateOrderDto';
-import { OrderSide } from '../model/constants/OrderSide';
-import { OrderStatus } from '../model/constants/OrderStatus';
-import { OrderType } from '../model/constants/OrderType';
-import { InvalidStateForCancellationError } from '../model/errors/InvalidStateForCancellationError';
+import { CreateOrderDtoExample } from '../../../test/examples/create-order-dto.example';
+import { CashAmountTradeDto } from '../dtos/cash-amount-trade.dto';
+import { CreateOrderDto } from '../dtos/create-order.dto';
+import { OrderSide } from '../model/constants/order-side';
+import { OrderStatus } from '../model/constants/order-status';
+import { OrderType } from '../model/constants/order-type';
+import { InvalidStateForCancellationError } from '../model/errors/invalid-state-for-cancellation.error';
 import { Order } from '../model/order.entity';
 import { OrderService } from './order.service';
 
@@ -111,7 +111,7 @@ describe('Order', () => {
 
   describe.skip('Given a LIMIT order type', () => {
     it('should create it successfully', async () => {
-      const OrderRequest = new CreateOrderDtoExample()
+      const orderRequest = new CreateOrderDtoExample()
         .withType(OrderType.LIMIT)
         .withLimitPrice(998)
         .build();
@@ -123,16 +123,16 @@ describe('Order', () => {
         .mockResolvedValueOnce(mockedMarketdata);
 
       const mockedOrder = repo.create({
-        userid: OrderRequest.userId,
-        instrumentid: OrderRequest.instrumentId,
-        size: OrderRequest.trade.stockSize(mockedMarketdata),
+        userid: orderRequest.userId,
+        instrumentid: orderRequest.instrumentId,
+        size: orderRequest.trade.stockSize(mockedMarketdata),
         price: mockedMarketdata.close,
-        type: OrderRequest.type,
-        side: OrderRequest.side,
+        type: orderRequest.type,
+        side: orderRequest.side,
       });
       jest.spyOn(repo, 'save').mockResolvedValueOnce(mockedOrder);
 
-      const actualOrder = await service.createOrder(OrderRequest);
+      const actualOrder = await service.createOrder(orderRequest);
 
       expect(actualOrder.id).toEqual(1);
       expect(actualOrder.status).toEqual(OrderStatus.NEW);

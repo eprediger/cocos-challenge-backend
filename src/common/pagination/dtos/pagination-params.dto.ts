@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
-import { PageOrder } from 'src/common/pagination/constants/PageOrder';
+import { PageOrder } from 'src/common/pagination/constants/page-order';
 
 const TAKE_MAXIMUM = 50;
 const TAKE_DEFAULT = 10;

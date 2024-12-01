@@ -1,10 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { PaginatedDto } from 'src/common/pagination/dtos/PaginatedDto';
+import { PaginatedDto } from 'src/common/pagination/dtos/paginated.dto';
 import { Instrument } from 'src/instruments/model/instrument.entity';
 import { InstrumentsService } from 'src/instruments/services/instruments.service';
-import { ApiPaginatedResponse } from '../../common/pagination/decorators/ApiPaginatedResponse';
-import { PaginationParamsDto } from '../../common/pagination/dtos/PaginationParamsDto';
-import { InstrumentQuery } from '../dtos/InstrumentQuery';
+import { ApiPaginatedResponse } from '../../common/pagination/decorators/api-paginated-response';
+import { PaginationParamsDto } from '../../common/pagination/dtos/pagination-params.dto';
+import { InstrumentQuery } from '../dtos/instrument-query.dto';
 
 @Controller('instruments')
 export class InstrumentsController {

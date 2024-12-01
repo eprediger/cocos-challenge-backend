@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Instrument } from 'src/instruments/model/instrument.entity';
-import { OrderSide } from 'src/order/model/constants/OrderSide';
+import { OrderSide } from 'src/order/model/constants/order-side';
 
 export class Asset {
   @ApiProperty()
