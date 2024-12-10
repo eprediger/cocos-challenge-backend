@@ -48,14 +48,21 @@ $ docker-compose exec api /bin/bash
 
 - Swagger: `GET /openapi`
 
-## Supuestos y decisiones de diseño
+## Supuestos, decisiones de diseño y futuros features.
 
-***Default actions* para no frenar el desarrollo:**
+### Usuarios
 
-- ~~Enviada consulta sobre calculo de rendimiento. Al momento se simplificó el cálculo al momento actual, esto es, se compara valor de la tenencia actual respecto al monto total invertido en las órdenes de compra. Recibida la respuesta, se prioriza implementación de envío de órdenes.~~
+- [ ] Tener en cuenta la validación del id usuario para la consulta de portofolio u orden.
+- [ ] Cuando exista registro, log in y endpoints segurizados y roles, eliminar el registro
 
-**Decisiones de diseño para agilizar el desarrollo:**
+### Calidad de código
 
-- No se tuvo en cuenta la validación del id usuario para la consulta de portofolio u orden.
-- Se utilizaron tipos primitivos en lugar de `value objects` en entidades simples (por ejemplo: moneda, porcentaje).
-- ~~Para simplificar el desarrollo, no se tiene en cuenta un paginado para la consulta de instrumentos~~
+- [x] Paginado genérico aplicado a la consulta de instrumentos, reutilizable.
+- [ ] Reemplazar tipos primitivos por `value objects` en entidades simples (por ejemplo: moneda, porcentaje) para unificar lógicas de parseo/validación.
+- [ ] Mejora búsqueda de texto
+	- [ ] Instrumentos a un único `query param` que realicé _full text search_ sobre ticker y nombre.
+	- [ ] Que la búsqueda soporte múltiples términos (¿separado por espacios?) en lugar de tomar todo el input como una única cadena
+
+### Performance
+
+- [ ] Analizar tiempos de respuesta agregando índices en la BBDD sobre campos consultados (`instruments.(ticker|name)`)

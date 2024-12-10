@@ -5,7 +5,7 @@ import {
   IsPositive,
   IsSemVer,
   IsString,
-  IsUrl
+  IsUrl,
 } from 'class-validator';
 
 export class Configuration {

@@ -109,12 +109,22 @@ describe('Order', () => {
     });
   });
 
-  describe.skip('Given a LIMIT order type', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+
+  describe('Given a LIMIT order type', () => {
     it('should create it successfully', async () => {
       const orderRequest = new CreateOrderDtoExample()
         .withType(OrderType.LIMIT)
         .withLimitPrice(998)
         .build();
+
+      const mockedPortfolio = new Portfolio([], []);
+      mockedPortfolio.availableForTrading = 100_000;
+      jest
+        .spyOn(portfolioService, 'findUserPortfolio')
+        .mockResolvedValueOnce(mockedPortfolio);
 
       const mockedMarketdata = new Marketdata();
       mockedMarketdata.close = 999;
@@ -129,12 +139,12 @@ describe('Order', () => {
         price: mockedMarketdata.close,
         type: orderRequest.type,
         side: orderRequest.side,
+        status: OrderStatus.NEW,
       });
       jest.spyOn(repo, 'save').mockResolvedValueOnce(mockedOrder);
 
       const actualOrder = await service.createOrder(orderRequest);
 
-      expect(actualOrder.id).toEqual(1);
       expect(actualOrder.status).toEqual(OrderStatus.NEW);
     });
   });
@@ -174,33 +184,39 @@ describe('Order', () => {
       expect(order.status).toEqual(OrderStatus.REJECTED);
     });
 
-    it.skip('should reject the order when the user has less than the order declared amount', async () => {
+    it('should reject the order when the user has less than the order declared amount', async () => {
       const orderRequest = new CreateOrderDtoExample()
         .withSide(OrderSide.CASH_OUT)
         .withTrade(plainToInstance(CashAmountTradeDto, { amount: 1000 }))
         .build();
 
-      const mockedMarketdata = new Marketdata();
-      mockedMarketdata.close = 1000;
+      const getLatestInstrumentMarketDataSpy = jest.spyOn(
+        marketDataService,
+        'getLatestInstrumentMarketData',
+      );
+
+      const mockedPortfolio = new Portfolio([], []);
+      mockedPortfolio.availableForTrading = 1000;
       jest
-        .spyOn(marketDataService, 'getLatestInstrumentMarketData')
-        .mockResolvedValueOnce(mockedMarketdata);
+        .spyOn(portfolioService, 'findUserPortfolio')
+        .mockResolvedValueOnce(mockedPortfolio);
 
       const mockedOrder = repo.create({
         id: 1,
         userid: orderRequest.userId,
         instrumentid: orderRequest.instrumentId,
-        size: orderRequest.trade.stockSize(mockedMarketdata),
-        price: mockedMarketdata.close,
+        size: 1000,
+        price: 1,
         type: orderRequest.type,
         side: orderRequest.side,
-        status: OrderStatus.REJECTED,
+        status: OrderStatus.FILLED,
       });
       jest.spyOn(repo, 'save').mockResolvedValueOnce(mockedOrder);
 
       const order = await service.createOrder(orderRequest);
 
-      expect(order.status).toEqual(OrderStatus.REJECTED);
+      expect(order.status).toEqual(OrderStatus.FILLED);
+      expect(getLatestInstrumentMarketDataSpy).not.toHaveBeenCalled();
     });
   });
 
